@@ -1,0 +1,121 @@
+/* Fonte hospedada no próprio site (Google Fonts é bloqueado pela segurança do site).
+   Fonte variável: um arquivo cobre todos os pesos. Os títulos usam a Outfit bem grossa,
+   que combina com o logo (letras pesadas, estilo industrial). */
+@font-face {
+  font-family: 'Outfit';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('../fonts/outfit-var.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* As animações de entrada (AOS fade-right/fade-left) começam fora da tela.
+     Sem cortar também no <html>, a página ganha rolagem lateral no celular.
+     "clip" corta sem criar área de rolagem e não atrapalha position: fixed. */
+  html {
+    overflow-x: hidden;
+    overflow-x: clip;
+  }
+  body {
+    overflow-x: hidden;
+    overflow-x: clip;
+  }
+  /* O menu fixo no topo não pode cobrir o título da seção ao clicar num link do menu. */
+  section[id] {
+    scroll-margin-top: 6rem;
+  }
+  /* Imagens não podem ser arrastadas nem abrir o menu de "salvar imagem" ao segurar o dedo. */
+  img {
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+  }
+  :focus-visible {
+    outline: 2px solid #F2353D;
+    outline-offset: 3px;
+  }
+}
+
+@layer utilities {
+  .glass-dark {
+    @apply bg-zinc-950/60 backdrop-blur-xl border border-white/10;
+  }
+  .glass-light {
+    @apply bg-zinc-900/70 backdrop-blur-xl border border-white/10;
+  }
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-brand-red-claro to-red-300;
+  }
+  .dots-bg {
+    background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+  /* Brilho de fundo feito com gradiente (blur grande pesa na placa de vídeo do celular). */
+  .brilho-vermelho {
+    background: radial-gradient(closest-side, rgba(227, 21, 30, 0.22), transparent);
+  }
+  .brilho-cinza {
+    background: radial-gradient(closest-side, rgba(113, 113, 122, 0.22), transparent);
+  }
+  .animation-delay-2000 {
+    animation-delay: 2s;
+  }
+  .animation-delay-3000 {
+    animation-delay: 3s;
+  }
+  /* Faixa que corre: some nas bordas em vez de cortar seco. */
+  .faixa-mascara {
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+    mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+  }
+}
+
+/* Menu no topo: mais escuro depois que a pessoa rola a página (classe posta pelo js/app.js). */
+.menu-topo.rolou {
+  @apply bg-black/80 shadow-black/60;
+}
+
+/* Passos do orçamento: a linha vermelha "cresce" quando a seção aparece (classe posta pelo AOS). */
+.linha-passos::before {
+  content: '';
+  position: absolute;
+  left: 1.5rem;
+  top: 1.5rem;
+  bottom: 1.5rem;
+  width: 2px;
+  background: linear-gradient(to bottom, #E3151E, rgba(255, 255, 255, 0.1));
+  transform-origin: top;
+  transform: scaleY(0);
+  transition: transform 1.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.linha-passos.aos-animate::before,
+.sem-animacao .linha-passos::before {
+  transform: scaleY(1);
+}
+
+/* Se o arquivo de animação não carregar, nada pode ficar invisível (aconteceu: o aos.js era uma
+   página "Redirecting" e o site ficou sem animação; com o CSS carregado, ficaria em branco). */
+.sem-animacao [data-aos] {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-blob,
+  .animate-ping-slow,
+  .animate-flutuar,
+  .animate-faixa {
+    animation: none !important;
+  }
+  .linha-passos::before {
+    transform: scaleY(1);
+    transition: none;
+  }
+}
