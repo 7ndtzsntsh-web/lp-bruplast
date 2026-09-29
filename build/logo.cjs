@@ -70,3 +70,20 @@ function svg(cor, vermelho, titulo) {
 fs.writeFileSync(out + "/logo.svg", svg("#111111", "#E3151E", "Bruplast - Tudo em embalagens plásticas lisas e impressas"));
 fs.writeFileSync(out + "/logo-branco.svg", svg("#FFFFFF", "#F2353D", "Bruplast - Tudo em embalagens plásticas lisas e impressas"));
 console.log("viewBox", vb, "razão", ((maxX - minX) / (maxY - minY)).toFixed(3));
+
+// Ícone da aba do navegador: "Bp" vermelho sobre preto, com as mesmas letras do logo (pedido do dono em 29/09/2026).
+// O build/og.cjs transforma em img/favicon.png e img/apple-touch-icon.png.
+const icB = black.getPath("B", 0, 0, S);
+const icP = black.getPath("p", black.getAdvanceWidth("B", S) - 3, 0, S);
+const bbB = icB.getBoundingBox(), bbP = icP.getBoundingBox();
+const ix1 = Math.min(bbB.x1, bbP.x1), ix2 = Math.max(bbB.x2, bbP.x2);
+const iy1 = Math.min(bbB.y1, bbP.y1), iy2 = Math.max(bbB.y2, bbP.y2);
+const lado = Math.max(ix2 - ix1, iy2 - iy1) * 1.14;
+const icx = (ix1 + ix2) / 2, icy = (iy1 + iy2) / 2;
+const icVb = `${(icx - lado / 2).toFixed(1)} ${(icy - lado / 2).toFixed(1)} ${lado.toFixed(1)} ${lado.toFixed(1)}`;
+const icone = (raio) => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${icVb}">` +
+  `<rect x="${(icx - lado / 2).toFixed(1)}" y="${(icy - lado / 2).toFixed(1)}" width="${lado.toFixed(1)}" height="${lado.toFixed(1)}" rx="${(lado * raio).toFixed(1)}" fill="#000"/>` +
+  `<path fill="#E3151E" d="${icB.toPathData(1)}${icP.toPathData(1)}"/></svg>\n`;
+const buildDir = require("path").join(__dirname);
+fs.writeFileSync(buildDir + "/icone.svg", icone(0.22));
+fs.writeFileSync(buildDir + "/icone-quadrado.svg", icone(0));

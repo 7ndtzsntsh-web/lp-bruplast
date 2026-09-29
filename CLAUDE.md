@@ -34,6 +34,7 @@ npm run security:scan   # Observatório da MDN contra o servidor local (com o de
 Não publicar se `npm run build` falhar. Scripts de imagem (precisam do `sharp`, que não fica no package.json
 para a Vercel não baixar à toa): `build/imagens.cjs` (fotos WebP), `build/logo.cjs` (logo em SVG),
 `build/og.cjs` + `build/og.html` (prévia do WhatsApp e ícones; precisa do puppeteer-core e do Chrome).
+Ícone da aba (pedido do dono): **"Bp" vermelho sobre preto**, com as letras do logo (`build/icone.svg`, feito pelo `logo.cjs`).
 
 ## Regras do código
 
@@ -83,9 +84,8 @@ Detalhes:
   `build/originais/cosh-gerada-por-ia.jpg` NÃO é usada: é a foto da Cosh refeita por IA, com texto inventado na sacola.
 - Anos de mercado: calculado pela data de fundação (21/05/2001) no `app.js`; o HTML traz 25 (valor em 2026).
 - "100% das aparas": o site antigo diz "toda sobra de plástico (APARA) são recuperados fazendo sacarias".
-- Projeto Cata Caca: matéria do jornal Município Dia a Dia de 23/09/2015. O texto diz que o projeto foi
-  **proposto** (sacolas gratuitas para dejetos de cães); a matéria conta que ficou parado com a troca de prefeito.
-  Por isso o site diz "propõe" e "foi destaque", e não que está funcionando.
+- Projeto Cata Caca (matéria do jornal Município Dia a Dia, 23/09/2015): **saiu do site a pedido do dono** (29/09/2026),
+  porque o recorte do jornal ficou feio. Além disso, a matéria conta que o projeto só foi proposto e ficou parado.
 - Toalhas da Fenarreco: post de 19/10/2015 ("mais 1 ano de confiança na 30ª Fenarreco"). O site diz que a Bruplast
   **fez** as toalhas da 30ª Fenarreco (não que faz até hoje).
 
