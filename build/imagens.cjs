@@ -32,10 +32,4 @@ const FOTOS = [
     }
     console.log(nome, `${meta.width}x${meta.height}`);
   }
-  // Matéria do jornal Município Dia a Dia (23/09/2015) sobre o projeto Cata Caca: só o título e o começo do texto.
-  const jornal = await sharp(path.join(O, "instagram/p09_7-S7RCkdun.jpg")).extract({ left: 200, top: 600, width: 560, height: 420 }).toBuffer();
-  for (const w of [640, 400]) {
-    await sharp(jornal).resize(w, Math.round((w * 3) / 4)).webp({ quality: 80 }).toFile(path.join(D, `jornal-cata-caca-${w}.webp`));
-  }
-  console.log("jornal-cata-caca");
 })();
