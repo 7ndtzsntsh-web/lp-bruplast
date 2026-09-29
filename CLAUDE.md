@@ -101,6 +101,12 @@ Detalhes:
   na CSP), sitemap, robots e llms.txt, e rever o HSTS (`includeSubDomains` pode quebrar webmail/painel sem
   certificado; foi o que aconteceu no site do Rodrigo Titericz).
 
+## Google (Search Console)
+
+- Site cadastrado no Google Search Console (29/09/2026) na conta Google do dono, propriedade https://bruplast.vercel.app/.
+  A verificação é a meta tag google-site-verification no head do index.html: **não remover** (senão o Google tira o
+  acesso ao painel). Se o site mudar de endereço (domínio bruplast.com.br), cadastrar o endereço novo lá também.
+
 ## Armadilhas que já aconteceram (aqui ou nos sites com a mesma base)
 
 1. `js/aos.js` e `css/aos.css` eram uma página de "Redirecting" baixada por engano: as animações nunca
