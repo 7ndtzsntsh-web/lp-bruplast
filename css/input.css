@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .glass-dark {
+    @apply bg-zinc-950/60 backdrop-blur-xl border border-white/10;
+  }
+  .glass-light {
+    @apply bg-zinc-800/60 backdrop-blur-xl border border-white/20;
+  }
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-red-500 to-red-300;
+  }
+  .dots-bg {
+    background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+  .animation-delay-2000 {
+    animation-delay: 2s;
+  }
+}
